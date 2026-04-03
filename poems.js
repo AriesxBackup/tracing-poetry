@@ -14,7 +14,7 @@ const POEMS = [
     author: "Lan Chungkham",
     category: "ꯋꯥꯈꯜ",
     painting: "The Drawing Lesson",
-    artist: "Getty Collection",
+    artist: "Lan Collection",
     image: GETTY + "intro/The-Drawing-Lesson@lg.webp",
     body: [
       "lonthoktaba paamel,\nkhonjel thoktaba waakhal\nahaangba maalang,\nningtamba wakhal gee taibang",
@@ -22,11 +22,11 @@ const POEMS = [
     ]
   },
   {
-    title: "ꯃꯥꯏꯀꯩ ꯈꯥꯡꯗꯅ",
+    title: "ꯋꯥꯈꯜꯒꯤ ꯅꯣꯡꯂꯩ",
     author: "Lan Chungkham",
     category: "ꯃꯤꯅꯨꯡꯁꯤ",
     painting: "The Adoration of the Magi",
-    artist: "Getty Collection",
+    artist: "Lan Collection",
     image: GETTY + "still-life/The-Adoration-of-the-Magi@lg.webp",
     body: [
       "maikei khangdana humlakpa\nkallaba nonglei nungshitna humdokpiraba",
@@ -34,11 +34,11 @@ const POEMS = [
     ]
   },
   {
-    title: "ꯑꯣꯏꯗꯕ ꯋꯥꯍꯩ",
+    title: " ꯄꯨꯟꯁꯤ ꯑꯃ",
     author: "Lan Chungkham",
     category: "ꯇꯥꯏꯕꯥꯡ",
     painting: "The Grand Canal in Venice",
-    artist: "Getty Collection",
+    artist: "Lan Collection",
     image: GETTY + "still-life/The-Grand-Canal-in-Venice-from-Palazzo@lg.webp",
     body: [
       "oidaba wahei sasinnaba saklon kayana\nmachu sangjinkhraba taibang gee mami:",
@@ -46,11 +46,11 @@ const POEMS = [
     ]
   },
   {
-    title: "ꯑꯃꯥꯟꯕ ꯃꯤꯍꯨꯠꯊꯣꯡ",
+    title: "ꯑꯃꯟꯕ ꯃꯤꯍꯨꯠꯊꯣꯡ",
     author: "Lan Chungkham",
     category: "ꯅꯨꯃꯤꯠ",
     painting: "The Bird Catchers",
-    artist: "Getty Collection",
+    artist: "Lan Collection",
     image: GETTY + "still-life/The-Bird-Catchers@lg.webp",
     body: [
       "amanba meehutthongni haiduna\nnumit ki mangaal di changlaktabrane?",
@@ -63,7 +63,7 @@ const POEMS = [
     author: "Lan Chungkham",
     category: "ꯅꯋꯥ",
     painting: "Irises at Yatsuhashi",
-    artist: "Getty Collection",
+    artist: "Lan Collection",
     image: GETTY + "still-life/Irises-at-Yatsuhashi@lg.webp",
     body: [
       "turel adugi torban da sannariba\nnawa makhoi gisu leiramgani\nmakhoi gee oiba tongaanba manglaan kaya\nturel adumaktada kumduna",
@@ -71,11 +71,11 @@ const POEMS = [
     ]
   },
   {
-    title: "ꯋꯥꯈꯜ ꯒꯤ ꯑꯦꯔꯩꯗ",
+    title: "ꯋꯥꯈꯜꯒꯤ ꯏꯔꯩꯗ",
     author: "Lan Chungkham",
     category: "ꯀꯥꯎꯁꯤꯡ",
     painting: "Vicomtesse de Vaudreuil",
-    artist: "Getty Collection",
+    artist: "Lan Collection",
     image: GETTY + "intro/The-Vicomtesse-de-Vaudreuil@lg.webp",
     body: [
       "wakhal gee ereida taotharakpa\nkaoshing mapei sing adugi panthungfam khara:",
@@ -88,7 +88,7 @@ const POEMS = [
     author: "Lan Chungkham",
     category: "ꯄꯨꯟꯁꯤ",
     painting: "Amsterdam Harbor Scene",
-    artist: "Getty Collection",
+    artist: "Lan Collection",
     image: GETTY + "still-life/amsterdam_harbor_scene_2011.3.1@lg.webp",
     body: [
       "punshi ama:\nmanglaan kaya,\naningba kaya,\nkhanjaba kaya,",
@@ -100,7 +100,7 @@ const POEMS = [
     author: "Lan Chungkham",
     category: "ꯁꯩꯔꯦꯡ",
     painting: "View of the Grand Canal",
-    artist: "Getty Collection",
+    artist: "Lan Collection",
     image: GETTY + "intro/View-of-the-Grand-Canal@lg.webp",
     body: [
       "punshi ama:\nthajaba kaya,\nhongba naidaba kaya,\nwakhal kaya",
@@ -108,11 +108,11 @@ const POEMS = [
     ]
   },
   {
-    title: "ꯋꯥꯈꯜ ꯅꯥꯡꯕꯨ",
+    title: "ꯋꯥꯈꯜ ꯅꯪꯕꯨ",
     author: "Lan Chungkham",
-    category: "ꯅꯒꯥꯏꯍꯥꯛ",
+    category: "ꯉꯥꯢꯍꯥꯛꯇ",
     painting: "Madonna of the Cherries",
-    artist: "Getty Collection",
+    artist: "Lan Collection",
     image: GETTY + "intro/Madonna-of-the-Cherries@lg.webp",
     body: [
       "wakhal nangbu ngaihakta pothakho\nkhallukhinu hayeng gisu\nningsingluranu ngarang dusu",
@@ -120,22 +120,22 @@ const POEMS = [
     ]
   },
   {
-    title: "ꯄꯥꯔꯤꯡ ꯂꯩꯇꯕ",
+    title: "ꯃꯪꯂꯥꯟ ꯄꯔꯤꯡ ꯂꯩꯇꯕ",
     author: "Lan Chungkham",
     category: "ꯃꯥꯡꯂꯥꯟ",
     painting: "Portrait of Sisters",
-    artist: "Getty Collection",
+    artist: "Lan Collection",
     image: GETTY + "still-life/Portrait-of-Sisters-Zenaide-and-Charlotte-Bonaparte@lg.webp",
     body: [
       "paring leitaba wakhal gee epaak adugi\nerolnungda lottuna leiriba\nmanglaan kaya, wari kaya, wakhallon kaya"
     ]
   },
   {
-    title: "ꯃꯤꯑꯣꯏꯕ ꯒꯤ ꯋꯥꯈꯜ",
+    title: "ꯃꯤꯑꯣꯢꯕꯒꯤ ꯋꯥꯈꯜꯅ",
     author: "Lan Chungkham",
     category: "ꯄꯨꯟꯁꯤ",
     painting: "Bouquet of Flowers in a Vase",
-    artist: "Getty Collection",
+    artist: "Lan Collection",
     image: GETTY + "still-life/Bouquet-of-Flowers-in-a-Vase@lg.webp",
     body: [
       "meeoiba gee wakhalna lamba fangdaba\npunshigi wahanthok khara su",
@@ -143,11 +143,11 @@ const POEMS = [
     ]
   },
   {
-    title: "ꯄꯨꯟꯁꯤ ꯒꯤ ꯁꯥꯛꯇꯥꯛꯋꯥ",
+    title: "ꯄꯨꯟꯁꯤꯒꯤ ꯁꯛꯇꯥꯛꯋꯥ",
     author: "Lan Chungkham",
     category: "ꯋꯥꯍꯟꯊꯣꯛ",
     painting: "Study of the Model Joseph",
-    artist: "Getty Collection",
+    artist: "Lan Collection",
     image: GETTY + "intro/Study-of-the-Model-Joseph@lg.webp",
     body: [
       "punshi gi saktaakwaa kayagi\nwahanthok kaya ama\nwahanthok sing adugisu\nwahanthok khara,",
