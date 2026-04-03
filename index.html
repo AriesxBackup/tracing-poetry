@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tracing Poetry</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Outfit:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="is-loading">
+
+  <!-- ===== ACCORDION-STYLE DARK PRELOADER ===== -->
+  <div class="preloader" id="preloader">
+    <div class="preloader__glow"></div>
+    <div class="filmstrip" id="filmstrip"></div>
+    <div class="preloader__brand">
+      <div class="preloader__icon">
+        <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+      </div>
+      <span class="preloader__text">Tracing Poetry</span>
+    </div>
+  </div>
+
+  <!-- ===== ACCORDION-STYLE DARK HERO ===== -->
+  <section class="hero" id="hero">
+    <div class="hero__bg" id="heroBg"></div>
+    <div class="hero__overlay"></div>
+    <div class="hero__content">
+      <p class="hero__eyebrow">A curated collection</p>
+      <h1 class="hero__title">POEMS</h1>
+      <div class="hero__icon"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+      <p class="hero__tagline">Words that move</p>
+    </div>
+    <div class="hero__scroll">
+      <span class="hero__scroll-text">SCROLL DOWN</span>
+      <div class="hero__scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ===== GETTY-STYLE INTRO (floating art + editorial text) ===== -->
+  <section class="collection-intro">
+    <div class="collection-intro__float" id="heroFloat"></div>
+    <div class="collection-intro__center">
+      <p class="collection-intro__eyebrow fade-up">Millions of Verses, Spanning Five Centuries</p>
+      <h2 class="collection-intro__heading fade-up">
+        Here's how the world's greatest <em>poems</em> continue to shape the way we <em>see, feel,</em> and <em>dream.</em>
+      </h2>
+      <div class="collection-intro__scroll fade-up">
+        <span>&darr;</span> Scroll down
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== GETTY-STYLE WHITE COLLECTION ===== -->
+  <section class="collection" id="collection">
+    <div class="collection__header">
+      <h2 class="collection__title fade-up">the <em>Collection</em></h2>
+      <p class="collection__sub fade-up">Twelve poems, spanning five centuries of verse</p>
+    </div>
+    <div class="collection__grid" id="poemGrid"></div>
+  </section>
+
+  <!-- ===== READER ===== -->
+  <div class="reader" id="reader">
+    <button class="reader__close" id="readerClose">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <div class="reader__hero">
+      <div class="reader__painting" id="readerPainting"></div>
+      <span class="reader__attribution" id="readerAttribution"></span>
+    </div>
+    <div class="reader__inner">
+      <div class="reader__meta">
+        <span class="reader__number" id="readerNumber"></span>
+        <span class="reader__category" id="readerCategory"></span>
+      </div>
+      <h2 class="reader__title" id="readerTitle"></h2>
+      <p class="reader__author" id="readerAuthor"></p>
+      <div class="reader__divider"></div>
+      <div class="reader__body" id="readerBody"></div>
+      <div class="reader__footer">
+        <button class="reader__nav" id="readerPrev">&larr; Previous</button>
+        <button class="reader__nav" id="readerNext">Next &rarr;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer__row"><span class="corner">+</span><span class="corner">+</span></div>
+    <div class="footer__row footer__row--mid">
+      <span class="footer__copy">TRACING POETRY &copy; 2024</span>
+      <span class="footer__copy">Words that move</span>
+    </div>
+    <div class="footer__row"><span class="corner">+</span><span class="corner">+</span></div>
+  </footer>
+
+  <script src="gsap.min.js"></script>
+  <script src="ScrollTrigger.min.js"></script>
+  <script src="poems.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

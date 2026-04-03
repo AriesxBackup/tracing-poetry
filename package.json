@@ -1,0 +1,10 @@
+{
+  "name": "tracing-poetry",
+  "version": "1.0.0",
+  "description": "A curated poem library with Getty-inspired scattered art layout and Accordion-style dark hero",
+  "private": true,
+  "scripts": {
+    "dev": "python -m http.server 8080",
+    "start": "npx serve ."
+  }
+}
