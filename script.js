@@ -7,75 +7,44 @@ document.addEventListener('DOMContentLoaded', () => {
   gsap.registerPlugin(ScrollTrigger);
 
   // ========================
-  // INTRO — Getty-style phased reveal
-  // ========================
-  const introEl = document.getElementById('intro');
-  const introBrand = document.getElementById('introBrand');
-  const introTitle = document.getElementById('introTitle');
-  const brandText = introBrand.querySelector('.intro__brand-text');
-  const h1El = introTitle.querySelector('.intro__h1');
-
-  let introComplete = false;
-
-  const introTL = gsap.timeline({
-    onComplete: () => {
-      if (introComplete) return;
-      introComplete = true;
-      introEl.classList.add('done');
-      document.body.classList.remove('is-loading');
-      animateLanding();
-    }
-  });
-
-  // Phase 1: "Tracing Poetry" brand fades in centered
-  introTL.to(brandText, { opacity: 1, duration: 1, ease: 'power2.out', delay: 0.3 });
-
-  // Phase 2: Brand fades out, big "Tracing Poetry" title scales up
-  introTL.to(brandText, { opacity: 0, duration: 0.5, ease: 'power2.in' }, '+=0.8');
-  introTL.to(introTitle, { opacity: 1, duration: 0.01 }, '-=0.1');
-  introTL.fromTo(h1El,
-    { opacity: 0, scale: 0.85, y: 20 },
-    { opacity: 1, scale: 1, y: 0, duration: 1.2, ease: 'power3.out' },
-    '-=0.1'
-  );
-
-  // Phase 3: Title holds, then the whole intro dissolves away revealing the landing
-  introTL.to(introEl, {
-    opacity: 0,
-    duration: 0.8,
-    ease: 'power2.inOut',
-    delay: 0.9
-  });
-
-  setTimeout(() => {
-    if (!introComplete) {
-      introComplete = true;
-      introEl.classList.add('done');
-      document.body.classList.remove('is-loading');
-      animateLanding();
-    }
-  }, 6000);
-
-  // ========================
   // LANDING — FLOATING ARTWORKS (Getty style)
   // ========================
   const floatContainer = document.getElementById('landingFloat');
 
   const floatingItems = [
-    { img: HERO_ARTS[0], w: 140, h: 180, x: '3%',  y: '8%' },
-    { img: HERO_ARTS[1], w: 120, h: 155, x: '82%', y: '5%' },
-    { img: HERO_ARTS[2], w: 170, h: 120, x: '70%', y: '55%' },
-    { img: HERO_ARTS[3], w: 105, h: 140, x: '2%',  y: '58%' },
-    { img: HERO_ARTS[4], w: 150, h: 105, x: '86%', y: '30%' },
-    { img: HERO_ARTS[5], w: 100, h: 130, x: '18%', y: '68%' },
-    { img: POEMS[0].image, w: 165, h: 210, x: '22%', y: '12%', poem: 0 },
-    { img: POEMS[3].image, w: 195, h: 140, x: '65%', y: '70%', poem: 3 },
-    { ghost: true, w: 80, h: 55,  x: '55%', y: '3%' },
-    { ghost: true, w: 50, h: 65,  x: '12%', y: '38%' },
-    { ghost: true, w: 90, h: 65,  x: '52%', y: '82%' },
-    { ghost: true, w: 60, h: 45,  x: '92%', y: '18%' },
-    { ghost: true, w: 45, h: 50,  x: '35%', y: '80%' },
-    { ghost: true, w: 70, h: 50,  x: '78%', y: '88%' },
+    // Top row — paintings and ghosts across the top
+    { img: HERO_ARTS[0], w: 110, h: 140, x: '1%',  y: '2%' },
+    { ghost: true,        w: 80,  h: 55,  x: '14%', y: '1%' },
+    { img: POEMS[0].image, w: 155, h: 195, x: '18%', y: '8%', poem: 0 },
+    { ghost: true,        w: 65,  h: 45,  x: '42%', y: '2%' },
+    { img: HERO_ARTS[1], w: 130, h: 95,  x: '52%', y: '5%' },
+    { ghost: true,        w: 55,  h: 70,  x: '72%', y: '1%' },
+    { img: HERO_ARTS[2], w: 155, h: 110, x: '80%', y: '6%' },
+
+    // Middle-left area
+    { img: HERO_ARTS[3], w: 100, h: 130, x: '0%',  y: '32%' },
+    { ghost: true,        w: 50,  h: 60,  x: '11%', y: '42%' },
+    { img: POEMS[5].image, w: 140, h: 175, x: '15%', y: '52%', poem: 5 },
+
+    // Middle-right area
+    { img: HERO_ARTS[4], w: 145, h: 105, x: '85%', y: '28%' },
+    { ghost: true,        w: 70,  h: 50,  x: '78%', y: '40%' },
+    { img: POEMS[3].image, w: 165, h: 120, x: '65%', y: '48%', poem: 3 },
+
+    // Bottom spread
+    { img: HERO_ARTS[5], w: 90,  h: 115, x: '0%',  y: '72%' },
+    { ghost: true,        w: 60,  h: 40,  x: '12%', y: '78%' },
+    { img: HERO_ARTS[6], w: 130, h: 165, x: '25%', y: '70%' },
+    { ghost: true,        w: 55,  h: 55,  x: '42%', y: '82%' },
+    { img: HERO_ARTS[7], w: 120, h: 85,  x: '52%', y: '76%' },
+    { ghost: true,        w: 70,  h: 50,  x: '68%', y: '85%' },
+    { img: POEMS[7].image, w: 110, h: 140, x: '78%', y: '68%', poem: 7 },
+    { ghost: true,        w: 45,  h: 60,  x: '92%', y: '78%' },
+
+    // Extra scattered ghosts for density
+    { ghost: true,        w: 90,  h: 60,  x: '35%', y: '3%' },
+    { ghost: true,        w: 60,  h: 80,  x: '93%', y: '50%' },
+    { ghost: true,        w: 50,  h: 35,  x: '60%', y: '90%' },
   ];
 
   floatingItems.forEach(item => {
@@ -97,43 +66,51 @@ document.addEventListener('DOMContentLoaded', () => {
     floatContainer.appendChild(el);
   });
 
+  // Kick off the landing reveal
+  document.body.classList.remove('is-loading');
+  animateLanding();
+
   function animateLanding() {
-    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
-
-    // Header and nav appear
-    tl.to('.landing__brand', { opacity: 1, duration: 0.8, delay: 0.1 })
-      .to('.landing__nav-link', { opacity: 1, duration: 0.6, stagger: 0.08 }, '-=0.4');
-
-    // Floating artworks scatter in from random positions (Getty-style)
     const floats = floatContainer.querySelectorAll('.float-item');
-    floats.forEach((el, i) => {
-      const angle = Math.random() * Math.PI * 2;
-      const dist = 120 + Math.random() * 200;
-      const startX = Math.cos(angle) * dist;
-      const startY = Math.sin(angle) * dist;
-      const delay = 0.15 + i * 0.06 + Math.random() * 0.15;
 
+    // Phase 1: "Tracing Poetry" brand fades in at top center (like Getty's "Getty")
+    gsap.to('#landingBrand', { opacity: 1, duration: 1.2, delay: 0.3, ease: 'power2.out' });
+
+    // Phase 2: After brand appears, eyebrow + heading + images all start fading in together
+    // Eyebrow text
+    gsap.fromTo('#landingEyebrow',
+      { opacity: 0 },
+      { opacity: 1, duration: 0.8, delay: 1.2, ease: 'power2.out' }
+    );
+
+    // Main heading — fades in and slightly up
+    gsap.fromTo('#landingHeading',
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, duration: 1.2, delay: 1.3, ease: 'power3.out' }
+    );
+
+    // Images and ghosts fade in at their positions with subtle scale
+    // (Getty doesn't scatter from random directions — they appear in-place)
+    floats.forEach((el, i) => {
+      const stagger = 1.0 + i * 0.08;
       gsap.fromTo(el,
-        { opacity: 0, x: startX, y: startY, scale: 0.7 },
-        { opacity: 1, x: 0, y: 0, scale: 1, duration: 1.4, delay, ease: 'power3.out' }
+        { opacity: 0, scale: 0.92 },
+        { opacity: 1, scale: 1, duration: 1.2, delay: stagger, ease: 'power2.out' }
       );
     });
 
-    // Center text appears after images start scattering
-    tl.to('.landing__eyebrow', { opacity: 1, duration: 0.8 }, '+=0.3')
-      .fromTo('.landing__heading',
-        { opacity: 0, y: 25 },
-        { opacity: 1, y: 0, duration: 1 }, '-=0.4'
-      )
-      .to('.landing__scroll', { opacity: 1, duration: 0.6 }, '-=0.3')
-      .to('.landing__hint', { opacity: 1, duration: 0.5 }, '-=0.2');
+    // Scroll indicator, nav, hint — appear after images
+    gsap.to('#landingScroll', { opacity: 1, duration: 0.6, delay: 2.2, ease: 'power2.out' });
+    gsap.to('#landingNav', { opacity: 1, duration: 0.6, delay: 1.8, ease: 'power2.out' });
+    gsap.to('#landingHint', { opacity: 1, duration: 0.6, delay: 2.4, ease: 'power2.out' });
+    gsap.to('#landingScrollbar', { opacity: 1, duration: 0.6, delay: 2.0, ease: 'power2.out' });
 
-    // Gentle continuous drift for floating items
+    // Gentle continuous drift (starts after entrance)
     setTimeout(() => {
       floats.forEach(el => {
-        const drift = (Math.random() - 0.5) * 14;
+        const drift = (Math.random() - 0.5) * 12;
         gsap.to(el, {
-          x: drift, y: drift * 0.5,
+          x: drift, y: drift * 0.4,
           duration: 5 + Math.random() * 4,
           repeat: -1, yoyo: true, ease: 'sine.inOut'
         });
@@ -149,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         });
       });
-    }, 2000);
+    }, 3000);
   }
 
   // ========================
