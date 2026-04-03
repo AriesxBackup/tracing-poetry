@@ -120,9 +120,9 @@ const POEMS = [
     ]
   },
   {
-    title: "ꯃꯪꯂꯥꯟ ꯄꯔꯤꯡ ꯂꯩꯇꯕ",
+    title: "ꯄꯔꯤꯡ ꯂꯩꯇꯕ",
     author: "Lan Chungkham",
-    category: "ꯃꯥꯡꯂꯥꯟ",
+    category: "ꯃꯪꯂꯥꯟ",
     painting: "Portrait of Sisters",
     artist: "Lan Collection",
     image: GETTY + "still-life/Portrait-of-Sisters-Zenaide-and-Charlotte-Bonaparte@lg.webp",
