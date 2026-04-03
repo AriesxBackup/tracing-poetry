@@ -140,9 +140,9 @@ document.addEventListener('DOMContentLoaded', () => {
   narrativeCaption.textContent = `Associated with "${featuredPoem.title}" by ${featuredPoem.author}`;
 
   const storyTexts = [
-    'Studying a poem\'s trajectory — from the moment it\'s written, then as it moves between new <em>readers</em> and <em>cultures</em>',
-    'and eventually reaches its present place in the <em>canon</em> — is the literary researcher\'s joy.',
-    'Through centuries of verse, we can see that poets <em>captured</em> what painters <em>rendered</em> — the eternal human condition.',
+    'Following a thought\'s journey — from the moment it stirs, then as it flows between <em>words</em> and <em>metaphors</em>',
+    'and eventually reaches its place as <em>verse</em> — is the reader\'s awakening.',
+    'Through Lan\'s poetry, we see that <em>thoughts</em> become rivers, <em>words</em> become echoes, and life becomes <em>seireng.</em>',
   ];
 
   storyTexts.forEach(text => {
@@ -191,9 +191,9 @@ document.addEventListener('DOMContentLoaded', () => {
     'scatter-row scatter-row--spread',
   ];
   const editorialTexts = [
-    'the <em>World</em><br>of <em>Poetry</em>',
-    'Words that <em>endure</em> across centuries,<br>speaking to every generation.',
-    'Through it, we can see<br>that poets <em>captured</em> what<br>painters <em>rendered.</em>',
+    '<em>ꯋꯥꯈꯜ,</em> <em>ꯋꯥꯍꯩ</em><br>& <em>ꯃꯦꯇꯥꯐꯣꯔ</em>',
+    'Thoughts that <em>flow</em> like rivers,<br>words that <em>echo</em> through silence.',
+    'Through verse, we can see<br>that thoughts <em>become</em> light<br>and metaphors <em>become</em> life.',
   ];
   const ghostSizes = ['xs', 'sm', 'md', 'lg'];
 
