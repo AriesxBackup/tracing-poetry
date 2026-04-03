@@ -26,31 +26,38 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   min-height: 100vh;
   min-height: 100dvh;
   background: var(--white);
-  display: flex;
-  align-items: center;
-  justify-content: center;
   overflow: hidden;
 }
 
-/* Brand at top center — like Getty's "Getty" wordmark */
-.landing__brand-wrap {
-  position: absolute;
-  top: 1.6rem;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 10;
-}
-
+/* Brand — starts centered in viewport, animates to top via JS */
 .landing__brand {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 20;
   font-family: var(--serif);
-  font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+  font-size: clamp(1.4rem, 2.8vw, 2rem);
   font-weight: 400;
   color: var(--black);
   letter-spacing: .01em;
   opacity: 0;
+  white-space: nowrap;
 }
 
-/* Nav top-right — like Getty's hamburger + dots */
+/* The full page content — invisible until brand moves up */
+.landing__page {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+}
+
+/* Nav top-right */
 .landing__nav {
   position: absolute;
   top: 1.6rem;
@@ -59,7 +66,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   display: flex;
   align-items: center;
   gap: 1rem;
-  opacity: 0;
 }
 
 .landing__nav-btn {
@@ -92,7 +98,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .float-item {
   position: absolute;
   will-change: transform;
-  opacity: 0;
   pointer-events: auto;
 }
 
@@ -130,7 +135,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   color: var(--warm);
   letter-spacing: .08em;
   margin-bottom: 2rem;
-  opacity: 0;
 }
 
 .landing__heading {
@@ -139,7 +143,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   font-weight: 400;
   line-height: 1.3;
   color: var(--black);
-  opacity: 0;
 }
 .landing__heading em {
   font-style: italic;
@@ -149,7 +152,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .landing__scroll {
   margin-top: 2.5rem;
   display: flex; align-items: center; justify-content: center; gap: .5rem;
-  opacity: 0;
 }
 
 .landing__scroll-arrow {
@@ -182,18 +184,16 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   padding: .45rem .9rem;
   border-radius: 16px;
   border: 1px solid var(--ghost);
-  opacity: 0;
   transition: opacity .6s;
 }
 
-/* Scrollbar indicator right edge (like Getty's) */
+/* Scrollbar indicator right edge */
 .landing__scrollbar {
   position: absolute;
   right: .8rem; top: 50%;
   transform: translateY(-50%);
   display: flex; flex-direction: column; gap: 3px;
   z-index: 10;
-  opacity: 0;
 }
 .landing__scrollbar span {
   width: 3px; height: 12px;

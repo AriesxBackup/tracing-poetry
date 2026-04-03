@@ -66,68 +66,65 @@ document.addEventListener('DOMContentLoaded', () => {
     floatContainer.appendChild(el);
   });
 
-  // Kick off the landing reveal
+  // ========================
+  // GETTY-STYLE LANDING REVEAL
+  // ========================
+  // 1. Brand fades in, centered in the viewport (hold ~1.5s)
+  // 2. Brand slides up to top + shrinks while full page fades in simultaneously
+  // 3. Gentle drift begins after reveal completes
+
   document.body.classList.remove('is-loading');
-  animateLanding();
 
-  function animateLanding() {
-    const floats = floatContainer.querySelectorAll('.float-item');
+  const brand = document.getElementById('landingBrand');
+  const page  = document.getElementById('landingPage');
+  const floats = floatContainer.querySelectorAll('.float-item');
 
-    // Phase 1: "Tracing Poetry" brand fades in at top center (like Getty's "Getty")
-    gsap.to('#landingBrand', { opacity: 1, duration: 1.2, delay: 0.3, ease: 'power2.out' });
+  const brandRect = brand.getBoundingClientRect();
+  const targetY   = 28;
+  const centerY   = brandRect.top;
+  const deltaY    = targetY - centerY;
 
-    // Phase 2: After brand appears, eyebrow + heading + images all start fading in together
-    // Eyebrow text
-    gsap.fromTo('#landingEyebrow',
-      { opacity: 0 },
-      { opacity: 1, duration: 0.8, delay: 1.2, ease: 'power2.out' }
-    );
+  const masterTL = gsap.timeline();
 
-    // Main heading — fades in and slightly up
-    gsap.fromTo('#landingHeading',
-      { opacity: 0, y: 20 },
-      { opacity: 1, y: 0, duration: 1.2, delay: 1.3, ease: 'power3.out' }
-    );
+  // Phase 1 — brand fades in at dead center (0.3s → visible, hold until ~1.6s)
+  masterTL.to(brand, { opacity: 1, duration: 0.8, ease: 'power2.out' }, 0.3);
 
-    // Images and ghosts fade in at their positions with subtle scale
-    // (Getty doesn't scatter from random directions — they appear in-place)
-    floats.forEach((el, i) => {
-      const stagger = 1.0 + i * 0.08;
-      gsap.fromTo(el,
-        { opacity: 0, scale: 0.92 },
-        { opacity: 1, scale: 1, duration: 1.2, delay: stagger, ease: 'power2.out' }
-      );
-    });
+  // Phase 2 — brand slides up to top + page content fades in simultaneously
+  masterTL.to(brand, {
+    y: deltaY,
+    fontSize: 'clamp(1.1rem, 2vw, 1.5rem)',
+    duration: 1.2,
+    ease: 'power3.inOut'
+  }, 1.8);
 
-    // Scroll indicator, nav, hint — appear after images
-    gsap.to('#landingScroll', { opacity: 1, duration: 0.6, delay: 2.2, ease: 'power2.out' });
-    gsap.to('#landingNav', { opacity: 1, duration: 0.6, delay: 1.8, ease: 'power2.out' });
-    gsap.to('#landingHint', { opacity: 1, duration: 0.6, delay: 2.4, ease: 'power2.out' });
-    gsap.to('#landingScrollbar', { opacity: 1, duration: 0.6, delay: 2.0, ease: 'power2.out' });
+  masterTL.to(page, {
+    opacity: 1,
+    duration: 1.2,
+    ease: 'power2.out'
+  }, 1.8);
 
-    // Gentle continuous drift (starts after entrance)
-    setTimeout(() => {
-      floats.forEach(el => {
-        const drift = (Math.random() - 0.5) * 12;
-        gsap.to(el, {
-          x: drift, y: drift * 0.4,
-          duration: 5 + Math.random() * 4,
-          repeat: -1, yoyo: true, ease: 'sine.inOut'
-        });
-
-        gsap.to(el, {
-          yPercent: -parseInt(el.dataset.speed || '15'),
-          ease: 'none',
-          scrollTrigger: {
-            trigger: '.landing',
-            start: 'top top',
-            end: 'bottom top',
-            scrub: 1.5
-          }
-        });
+  // Phase 3 — gentle drift after reveal settles
+  masterTL.call(() => {
+    floats.forEach(el => {
+      const drift = (Math.random() - 0.5) * 12;
+      gsap.to(el, {
+        x: drift, y: drift * 0.4,
+        duration: 5 + Math.random() * 4,
+        repeat: -1, yoyo: true, ease: 'sine.inOut'
       });
-    }, 3000);
-  }
+
+      gsap.to(el, {
+        yPercent: -parseInt(el.dataset.speed || '15'),
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '.landing',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 1.5
+        }
+      });
+    });
+  }, null, 3.5);
 
   // ========================
   // NARRATIVE SECTION

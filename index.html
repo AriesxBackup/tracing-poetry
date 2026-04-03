@@ -11,45 +11,37 @@
 </head>
 <body class="is-loading">
 
-  <!-- ===== LANDING (Getty Tracing Art-style single page) ===== -->
+  <!-- ===== LANDING (Getty Tracing Art-style) ===== -->
   <section class="landing" id="landing">
 
-    <!-- Brand at top center (like "Getty") -->
-    <div class="landing__brand-wrap">
-      <span class="landing__brand" id="landingBrand">Tracing Poetry</span>
-    </div>
+    <!-- Brand starts CENTERED in viewport, will animate to top -->
+    <span class="landing__brand" id="landingBrand">Tracing Poetry</span>
 
-    <!-- Nav: hamburger + chapters button top-right -->
-    <nav class="landing__nav" id="landingNav">
-      <button class="landing__nav-btn" id="menuBtn">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/></svg>
-      </button>
-      <div class="landing__nav-dots">
-        <span></span><span></span><span></span>
+    <!-- Everything below is the "page" that fades in after brand moves up -->
+    <div class="landing__page" id="landingPage">
+
+      <nav class="landing__nav" id="landingNav">
+        <button class="landing__nav-btn" id="menuBtn">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/></svg>
+        </button>
+        <div class="landing__nav-dots"><span></span><span></span><span></span></div>
+      </nav>
+
+      <div class="landing__float" id="landingFloat"></div>
+
+      <div class="landing__center">
+        <p class="landing__eyebrow" id="landingEyebrow">Millions of Verses, Spanning Five Centuries</p>
+        <h1 class="landing__heading" id="landingHeading">Here's how the world's greatest <em>poems</em> continue to shape the way we <em>see, feel,</em> and <em>dream.</em></h1>
+        <div class="landing__scroll" id="landingScroll">
+          <span class="landing__scroll-arrow">&darr;</span>
+          <span class="landing__scroll-text">Scroll down</span>
+        </div>
       </div>
-    </nav>
 
-    <!-- Floating artworks + ghosts scattered across viewport -->
-    <div class="landing__float" id="landingFloat"></div>
+      <div class="landing__hint" id="landingHint">Click on an artwork to learn more</div>
+      <div class="landing__scrollbar" id="landingScrollbar"><span></span><span></span><span></span></div>
 
-    <!-- Center editorial content -->
-    <div class="landing__center" id="landingCenter">
-      <p class="landing__eyebrow" id="landingEyebrow">Millions of Verses, Spanning Five Centuries</p>
-      <h1 class="landing__heading" id="landingHeading">Here's how the world's greatest <em>poems</em> continue to shape the way we <em>see, feel,</em> and <em>dream.</em></h1>
-      <div class="landing__scroll" id="landingScroll">
-        <span class="landing__scroll-arrow">&darr;</span>
-        <span class="landing__scroll-text">Scroll down</span>
-      </div>
     </div>
-
-    <!-- Hint pill bottom-right -->
-    <div class="landing__hint" id="landingHint">Click on an artwork to learn more</div>
-
-    <!-- Scrollbar indicator right edge -->
-    <div class="landing__scrollbar" id="landingScrollbar">
-      <span></span><span></span><span></span>
-    </div>
-
   </section>
 
   <!-- ===== NARRATIVE SECTION (scroll-driven story) ===== -->
