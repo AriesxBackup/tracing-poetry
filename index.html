@@ -6,58 +6,64 @@
   <title>Tracing Poetry</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Outfit:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body class="is-loading">
 
-  <!-- ===== ACCORDION-STYLE DARK PRELOADER ===== -->
-  <div class="preloader" id="preloader">
-    <div class="preloader__glow"></div>
-    <div class="filmstrip" id="filmstrip"></div>
-    <div class="preloader__brand">
-      <div class="preloader__icon">
-        <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-      </div>
-      <span class="preloader__text">Tracing Poetry</span>
+  <!-- ===== INTRO (Getty-style phased reveal) ===== -->
+  <div class="intro" id="intro">
+    <!-- Phase 1: Brand word centered -->
+    <div class="intro__brand" id="introBrand">
+      <span class="intro__brand-text">Tracing Poetry</span>
+    </div>
+    <!-- Phase 2: Full title reveal -->
+    <div class="intro__title" id="introTitle">
+      <h1 class="intro__h1">Tracing<br><em>Poetry</em></h1>
     </div>
   </div>
 
-  <!-- ===== ACCORDION-STYLE DARK HERO ===== -->
-  <section class="hero" id="hero">
-    <div class="hero__bg" id="heroBg"></div>
-    <div class="hero__overlay"></div>
-    <div class="hero__content">
-      <p class="hero__eyebrow">A curated collection</p>
-      <h1 class="hero__title">POEMS</h1>
-      <div class="hero__icon"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-      <p class="hero__tagline">Words that move</p>
-    </div>
-    <div class="hero__scroll">
-      <span class="hero__scroll-text">SCROLL DOWN</span>
-      <div class="hero__scroll-line"></div>
-    </div>
-  </section>
+  <!-- ===== LANDING ===== -->
+  <section class="landing" id="landing">
+    <header class="landing__header">
+      <span class="landing__brand">Tracing Poetry</span>
+      <nav class="landing__nav">
+        <a href="#collection" class="landing__nav-link">Collection</a>
+        <button class="landing__nav-link landing__nav-link--menu" id="menuBtn">
+          <span></span><span></span>
+        </button>
+      </nav>
+    </header>
 
-  <!-- ===== GETTY-STYLE INTRO (floating art + editorial text) ===== -->
-  <section class="collection-intro">
-    <div class="collection-intro__float" id="heroFloat"></div>
-    <div class="collection-intro__center">
-      <p class="collection-intro__eyebrow fade-up">Millions of Verses, Spanning Five Centuries</p>
-      <h2 class="collection-intro__heading fade-up">
-        Here's how the world's greatest <em>poems</em> continue to shape the way we <em>see, feel,</em> and <em>dream.</em>
-      </h2>
-      <div class="collection-intro__scroll fade-up">
-        <span>&darr;</span> Scroll down
+    <div class="landing__float" id="landingFloat"></div>
+
+    <div class="landing__center" id="landingCenter">
+      <p class="landing__eyebrow">Millions of Verses, Spanning Five Centuries</p>
+      <h2 class="landing__heading">Here's how the world's greatest <em>poems</em> continue to shape the way we <em>see, feel,</em> and <em>dream.</em></h2>
+      <div class="landing__scroll">
+        <span class="landing__scroll-arrow">&darr;</span>
+        <span class="landing__scroll-text">Scroll down</span>
       </div>
     </div>
+
+    <div class="landing__hint">Click on an artwork to learn more</div>
   </section>
 
-  <!-- ===== GETTY-STYLE WHITE COLLECTION ===== -->
+  <!-- ===== NARRATIVE SECTION (scroll-driven story) ===== -->
+  <section class="narrative" id="narrative">
+    <div class="narrative__block">
+      <div class="narrative__painting" id="narrativePainting"></div>
+      <h2 class="narrative__title" id="narrativeTitle"></h2>
+      <p class="narrative__caption" id="narrativeCaption"></p>
+    </div>
+    <div class="narrative__text-blocks" id="narrativeTexts"></div>
+  </section>
+
+  <!-- ===== COLLECTION ===== -->
   <section class="collection" id="collection">
     <div class="collection__header">
-      <h2 class="collection__title fade-up">the <em>Collection</em></h2>
-      <p class="collection__sub fade-up">Twelve poems, spanning five centuries of verse</p>
+      <p class="collection__eyebrow fade-up">The Collection</p>
+      <h2 class="collection__title fade-up">Twelve poems, spanning<br>five centuries of <em>verse.</em></h2>
     </div>
     <div class="collection__grid" id="poemGrid"></div>
   </section>
@@ -89,12 +95,10 @@
 
   <!-- ===== FOOTER ===== -->
   <footer class="footer">
-    <div class="footer__row"><span class="corner">+</span><span class="corner">+</span></div>
-    <div class="footer__row footer__row--mid">
-      <span class="footer__copy">TRACING POETRY &copy; 2024</span>
-      <span class="footer__copy">Words that move</span>
+    <div class="footer__inner">
+      <span class="footer__brand">Tracing Poetry</span>
+      <span class="footer__copy">&copy; 2024 &mdash; Words that move</span>
     </div>
-    <div class="footer__row"><span class="corner">+</span><span class="corner">+</span></div>
   </footer>
 
   <script src="gsap.min.js"></script>

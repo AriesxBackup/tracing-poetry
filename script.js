@@ -1,182 +1,212 @@
 /**
  * Tracing Poetry — Main Application
- * Depends on: poems.js (POEMS, HERO_ARTS, HERO_BACKGROUNDS)
- *             gsap.min.js, ScrollTrigger.min.js
+ * Getty Tracing Art-inspired landing with poem library
+ * Depends on: poems.js, gsap.min.js, ScrollTrigger.min.js
  */
 document.addEventListener('DOMContentLoaded', () => {
   gsap.registerPlugin(ScrollTrigger);
 
   // ========================
-  // FILMSTRIP PRELOADER
+  // INTRO — Getty-style phased reveal
   // ========================
+  const introEl = document.getElementById('intro');
+  const introBrand = document.getElementById('introBrand');
+  const introTitle = document.getElementById('introTitle');
+  const brandText = introBrand.querySelector('.intro__brand-text');
+  const h1El = introTitle.querySelector('.intro__h1');
 
-  const filmstripEl = document.getElementById('filmstrip');
-  const preloaderEl = document.getElementById('preloader');
+  let introComplete = false;
 
-  POEMS.forEach(poem => {
-    const strip = document.createElement('div');
-    strip.className = 'filmstrip__strip';
-    strip.style.backgroundImage = `url('${poem.image}')`;
-    filmstripEl.appendChild(strip);
+  const introTL = gsap.timeline({
+    onComplete: () => {
+      if (introComplete) return;
+      introComplete = true;
+      introEl.classList.add('done');
+      document.body.classList.remove('is-loading');
+      animateLanding();
+    }
   });
 
-  const strips = filmstripEl.querySelectorAll('.filmstrip__strip');
-  const stripCount = strips.length;
-  const stripCenter = (stripCount - 1) / 2;
-  let filmstripReady = false;
-  let imagesLoaded = 0;
+  // Phase 1: "Tracing Poetry" brand fades in centered
+  introTL.to(brandText, { opacity: 1, duration: 1, ease: 'power2.out', delay: 0.3 });
 
-  strips.forEach(strip => {
-    const url = strip.style.backgroundImage.slice(5, -2);
-    const img = new Image();
-    img.onload = img.onerror = () => {
-      imagesLoaded++;
-      if (imagesLoaded >= stripCount) startFilmstrip();
-    };
-    img.src = url;
+  // Phase 2: Brand fades out, big "Tracing Poetry" title scales up
+  introTL.to(brandText, { opacity: 0, duration: 0.5, ease: 'power2.in' }, '+=0.8');
+  introTL.to(introTitle, { opacity: 1, duration: 0.01 }, '-=0.1');
+  introTL.fromTo(h1El,
+    { opacity: 0, scale: 0.85, y: 20 },
+    { opacity: 1, scale: 1, y: 0, duration: 1.2, ease: 'power3.out' },
+    '-=0.1'
+  );
+
+  // Phase 3: Title holds, then the whole intro dissolves away revealing the landing
+  introTL.to(introEl, {
+    opacity: 0,
+    duration: 0.8,
+    ease: 'power2.inOut',
+    delay: 0.9
   });
 
-  setTimeout(() => { if (!filmstripReady) startFilmstrip(); }, 2500);
-
-  function startFilmstrip() {
-    if (filmstripReady) return;
-    filmstripReady = true;
-
-    // Phase 1: Position strips in a wide concave arc, start far away
-    strips.forEach((strip, i) => {
-      const n = stripCenter === 0 ? 0 : (i - stripCenter) / stripCenter;
-      const x = (i - stripCenter) * 58;
-      const rotY = -n * 28;
-      const z = -(n * n) * 110;
-      // Start pushed further back and transparent
-      strip.style.transform = `translateX(${x}px) rotateY(${rotY}deg) translateZ(${z - 80}px) scale(0.85)`;
-    });
-
-    // Phase 2: Stagger in from edges, pull forward into final arc position
-    strips.forEach((strip, i) => {
-      const n = stripCenter === 0 ? 0 : (i - stripCenter) / stripCenter;
-      const x = (i - stripCenter) * 58;
-      const rotY = -n * 28;
-      const z = -(n * n) * 110;
-      const edgeDelay = Math.abs(n) * 0.06;
-
-      gsap.to(strip, {
-        opacity: 1,
-        duration: 0.7,
-        delay: 0.1 + edgeDelay,
-        ease: 'power2.out'
-      });
-
-      gsap.to(strip, {
-        keyframes: [
-          { transform: `translateX(${x}px) rotateY(${rotY}deg) translateZ(${z}px) scale(1)`, duration: 0.8, ease: 'power3.out' },
-        ],
-        delay: 0.1 + edgeDelay,
-      });
-    });
-
-    // Phase 3: Hold for 2s, then dramatic exit — fan out like pages
-    setTimeout(() => {
-      strips.forEach((strip, i) => {
-        const n = stripCenter === 0 ? 0 : (i - stripCenter) / stripCenter;
-        const exitRotY = n * 60;
-        const exitX = n * 300;
-
-        gsap.to(strip, {
-          x: exitX,
-          rotationY: exitRotY,
-          scale: 1.3,
-          opacity: 0,
-          y: -40,
-          duration: 1.4,
-          delay: (1 - Math.abs(n)) * 0.1,
-          ease: 'power3.in'
-        });
-      });
-
-      // Fade out brand text
-      const brandEl = document.querySelector('.preloader__brand');
-      if (brandEl) gsap.to(brandEl, { opacity: 0, y: -20, duration: 0.6, delay: 0.3, ease: 'power2.in' });
-
-      setTimeout(() => {
-        preloaderEl.classList.add('done');
-        document.body.classList.remove('is-loading');
-      }, 1300);
-    }, 2600);
-  }
+  setTimeout(() => {
+    if (!introComplete) {
+      introComplete = true;
+      introEl.classList.add('done');
+      document.body.classList.remove('is-loading');
+      animateLanding();
+    }
+  }, 6000);
 
   // ========================
-  // HERO BACKGROUND CYCLING
+  // LANDING — FLOATING ARTWORKS (Getty style)
   // ========================
+  const floatContainer = document.getElementById('landingFloat');
 
-  const heroBgEl = document.getElementById('heroBg');
-  HERO_BACKGROUNDS.forEach((url, i) => {
-    const slide = document.createElement('div');
-    slide.className = 'hero__bg-slide' + (i === 0 ? ' active' : '');
-    slide.style.backgroundImage = `url('${url}')`;
-    heroBgEl.appendChild(slide);
-  });
+  const floatingItems = [
+    { img: HERO_ARTS[0], w: 140, h: 180, x: '3%',  y: '8%' },
+    { img: HERO_ARTS[1], w: 120, h: 155, x: '82%', y: '5%' },
+    { img: HERO_ARTS[2], w: 170, h: 120, x: '70%', y: '55%' },
+    { img: HERO_ARTS[3], w: 105, h: 140, x: '2%',  y: '58%' },
+    { img: HERO_ARTS[4], w: 150, h: 105, x: '86%', y: '30%' },
+    { img: HERO_ARTS[5], w: 100, h: 130, x: '18%', y: '68%' },
+    { img: POEMS[0].image, w: 165, h: 210, x: '22%', y: '12%', poem: 0 },
+    { img: POEMS[3].image, w: 195, h: 140, x: '65%', y: '70%', poem: 3 },
+    { ghost: true, w: 80, h: 55,  x: '55%', y: '3%' },
+    { ghost: true, w: 50, h: 65,  x: '12%', y: '38%' },
+    { ghost: true, w: 90, h: 65,  x: '52%', y: '82%' },
+    { ghost: true, w: 60, h: 45,  x: '92%', y: '18%' },
+    { ghost: true, w: 45, h: 50,  x: '35%', y: '80%' },
+    { ghost: true, w: 70, h: 50,  x: '78%', y: '88%' },
+  ];
 
-  const heroSlides = heroBgEl.querySelectorAll('.hero__bg-slide');
-  let heroIndex = 0;
-  setInterval(() => {
-    heroSlides[heroIndex].classList.remove('active');
-    heroIndex = (heroIndex + 1) % heroSlides.length;
-    heroSlides[heroIndex].classList.add('active');
-  }, 5000);
+  floatingItems.forEach(item => {
+    const el = document.createElement('div');
+    el.className = item.ghost ? 'float-item float-item--ghost' : 'float-item float-item--painting';
+    el.style.cssText = `left:${item.x};top:${item.y};width:${item.w}px;height:${item.h}px;`;
 
-  // ========================
-  // FLOATING HERO ART
-  // ========================
-
-  const floatContainer = document.getElementById('heroFloat');
-  if (floatContainer) {
-    const positions = [
-      { img: HERO_ARTS[0], w: 130, h: 170, x: '6%',  y: '10%' },
-      { img: HERO_ARTS[1], w: 115, h: 150, x: '80%', y: '8%' },
-      { img: HERO_ARTS[2], w: 160, h: 115, x: '72%', y: '60%' },
-      { img: HERO_ARTS[3], w: 100, h: 135, x: '4%',  y: '62%' },
-      { img: HERO_ARTS[4], w: 140, h: 100, x: '84%', y: '36%' },
-      { img: HERO_ARTS[5], w: 95,  h: 125, x: '20%', y: '70%' },
-      { ghost: true, w: 70, h: 55, x: '52%', y: '5%' },
-      { ghost: true, w: 45, h: 60, x: '14%', y: '40%' },
-      { ghost: true, w: 80, h: 60, x: '58%', y: '78%' },
-      { ghost: true, w: 55, h: 45, x: '90%', y: '20%' },
-    ];
-
-    positions.forEach(item => {
-      const el = document.createElement('div');
-      el.className = item.ghost ? 'float-item float-item--ghost' : 'float-item float-item--painting';
-      el.style.cssText = `left:${item.x};top:${item.y};width:${item.w}px;height:${item.h}px;`;
-      if (!item.ghost) {
-        const img = document.createElement('img');
-        img.src = item.img;
-        img.alt = '';
-        el.appendChild(img);
+    if (!item.ghost) {
+      const img = document.createElement('img');
+      img.src = item.img;
+      img.alt = '';
+      img.loading = 'eager';
+      el.appendChild(img);
+      if (item.poem !== undefined) {
+        el.addEventListener('click', () => openReader(item.poem));
       }
-      el.dataset.speed = (Math.random() * 25 + 8).toFixed(0);
-      floatContainer.appendChild(el);
+    }
+    el.dataset.speed = (Math.random() * 25 + 8).toFixed(0);
+    floatContainer.appendChild(el);
+  });
+
+  function animateLanding() {
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+    // Header and nav appear
+    tl.to('.landing__brand', { opacity: 1, duration: 0.8, delay: 0.1 })
+      .to('.landing__nav-link', { opacity: 1, duration: 0.6, stagger: 0.08 }, '-=0.4');
+
+    // Floating artworks scatter in from random positions (Getty-style)
+    const floats = floatContainer.querySelectorAll('.float-item');
+    floats.forEach((el, i) => {
+      const angle = Math.random() * Math.PI * 2;
+      const dist = 120 + Math.random() * 200;
+      const startX = Math.cos(angle) * dist;
+      const startY = Math.sin(angle) * dist;
+      const delay = 0.15 + i * 0.06 + Math.random() * 0.15;
+
+      gsap.fromTo(el,
+        { opacity: 0, x: startX, y: startY, scale: 0.7 },
+        { opacity: 1, x: 0, y: 0, scale: 1, duration: 1.4, delay, ease: 'power3.out' }
+      );
     });
 
+    // Center text appears after images start scattering
+    tl.to('.landing__eyebrow', { opacity: 1, duration: 0.8 }, '+=0.3')
+      .fromTo('.landing__heading',
+        { opacity: 0, y: 25 },
+        { opacity: 1, y: 0, duration: 1 }, '-=0.4'
+      )
+      .to('.landing__scroll', { opacity: 1, duration: 0.6 }, '-=0.3')
+      .to('.landing__hint', { opacity: 1, duration: 0.5 }, '-=0.2');
+
+    // Gentle continuous drift for floating items
     setTimeout(() => {
-      const floats = floatContainer.querySelectorAll('.float-item');
-      gsap.to(floats, { opacity: 1, duration: 1.2, stagger: 0.12, delay: 0.3, ease: 'power2.out' });
       floats.forEach(el => {
-        const drift = (Math.random() - 0.5) * 18;
-        gsap.to(el, { x: drift, y: drift * 0.6, duration: 4 + Math.random() * 3, repeat: -1, yoyo: true, ease: 'sine.inOut' });
+        const drift = (Math.random() - 0.5) * 14;
+        gsap.to(el, {
+          x: drift, y: drift * 0.5,
+          duration: 5 + Math.random() * 4,
+          repeat: -1, yoyo: true, ease: 'sine.inOut'
+        });
+
         gsap.to(el, {
           yPercent: -parseInt(el.dataset.speed || '15'),
           ease: 'none',
-          scrollTrigger: { trigger: '.collection-intro', start: 'top bottom', end: 'bottom top', scrub: 1.5 }
+          scrollTrigger: {
+            trigger: '.landing',
+            start: 'top top',
+            end: 'bottom top',
+            scrub: 1.5
+          }
         });
       });
-    }, 3800);
+    }, 2000);
   }
+
+  // ========================
+  // NARRATIVE SECTION
+  // ========================
+  const featuredPoem = POEMS[0];
+  const narrativePainting = document.getElementById('narrativePainting');
+  const narrativeTitle = document.getElementById('narrativeTitle');
+  const narrativeCaption = document.getElementById('narrativeCaption');
+  const narrativeTexts = document.getElementById('narrativeTexts');
+
+  narrativePainting.style.backgroundImage = `url('${featuredPoem.image}')`;
+  narrativeTitle.textContent = `${featuredPoem.painting}, ${featuredPoem.artist}`;
+  narrativeCaption.textContent = `Associated with "${featuredPoem.title}" by ${featuredPoem.author}`;
+
+  const storyTexts = [
+    'Studying a poem\'s trajectory — from the moment it\'s written, then as it moves between new <em>readers</em> and <em>cultures</em>',
+    'and eventually reaches its present place in the <em>canon</em> — is the literary researcher\'s joy.',
+    'Through centuries of verse, we can see that poets <em>captured</em> what painters <em>rendered</em> — the eternal human condition.',
+  ];
+
+  storyTexts.forEach(text => {
+    const p = document.createElement('p');
+    p.className = 'narrative__text';
+    p.innerHTML = text;
+    narrativeTexts.appendChild(p);
+  });
+
+  gsap.fromTo(narrativePainting,
+    { opacity: 0, y: 60 },
+    { opacity: 1, y: 0, duration: 1.2, ease: 'power3.out',
+      scrollTrigger: { trigger: narrativePainting, start: 'top 85%', once: true } }
+  );
+
+  gsap.fromTo(narrativeTitle,
+    { opacity: 0, y: 20 },
+    { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out',
+      scrollTrigger: { trigger: narrativeTitle, start: 'top 90%', once: true } }
+  );
+
+  gsap.fromTo(narrativeCaption,
+    { opacity: 0, y: 15 },
+    { opacity: 1, y: 0, duration: 0.8, delay: 0.15, ease: 'power3.out',
+      scrollTrigger: { trigger: narrativeCaption, start: 'top 92%', once: true } }
+  );
+
+  document.querySelectorAll('.narrative__text').forEach(el => {
+    gsap.fromTo(el,
+      { opacity: 0, y: 40 },
+      { opacity: 1, y: 0, duration: 1, ease: 'power3.out',
+        scrollTrigger: { trigger: el, start: 'top 85%', once: true } }
+    );
+  });
 
   // ========================
   // COLLECTION — AUTO LAYOUT
   // ========================
-
   const gridEl = document.getElementById('poemGrid');
   const sizes = ['md', 'sm', 'lg', 'lg', 'sm', 'md', 'md', 'md', 'sm', 'md', 'xl', 'sm'];
   const offsets = ['', 'down2', 'up', '', 'down', 'up', '', '', 'down2', 'up', 'down', ''];
@@ -250,7 +280,6 @@ document.addEventListener('DOMContentLoaded', () => {
     gridEl.appendChild(el);
   }
 
-  // Auto-generate rows: 3 poems per row, with editorial text + solo features interspersed
   let poemIdx = 0;
   let rowIdx = 0;
   let textIdx = 0;
@@ -278,22 +307,15 @@ document.addEventListener('DOMContentLoaded', () => {
     poemIdx += poemsInRow;
     rowIdx++;
 
-    // Insert editorial text after every 3 poems (if available)
     if (textIdx < editorialTexts.length && poemIdx < POEMS.length) {
       addEditorialText(editorialTexts[textIdx]);
       textIdx++;
-    }
-
-    // Insert a solo hero feature for the 7th poem (or every 7th)
-    if (poemIdx === 7 && poemIdx < POEMS.length) {
-      // already placed poem 6 (index 6) in the row, feature it as solo too? skip for now
     }
   }
 
   // ========================
   // POEM READER
   // ========================
-
   const readerEl = document.getElementById('reader');
   let currentPoem = 0;
 
@@ -346,12 +368,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // ========================
   // SCROLL ANIMATIONS
   // ========================
-
-  gsap.to('.hero__bg', {
-    yPercent: 20, ease: 'none',
-    scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true }
-  });
-
   document.querySelectorAll('.fade-up').forEach(el => {
     gsap.fromTo(el,
       { opacity: 0, y: 40 },
@@ -378,7 +394,8 @@ document.addEventListener('DOMContentLoaded', () => {
       );
     }
     gsap.to(el, {
-      yPercent: -speed, ease: 'none',
+      yPercent: -speed,
+      ease: 'none',
       scrollTrigger: { trigger: el, start: 'top bottom', end: 'bottom top', scrub: 1.5 }
     });
   });
@@ -390,4 +407,15 @@ document.addEventListener('DOMContentLoaded', () => {
         scrollTrigger: { trigger: el, start: 'top 90%', once: true } }
     );
   });
+
+  // Hide landing hint on scroll
+  const hintEl = document.querySelector('.landing__hint');
+  if (hintEl) {
+    ScrollTrigger.create({
+      trigger: '.narrative',
+      start: 'top 80%',
+      once: true,
+      onEnter: () => gsap.to(hintEl, { opacity: 0, duration: 0.4 })
+    });
+  }
 });
